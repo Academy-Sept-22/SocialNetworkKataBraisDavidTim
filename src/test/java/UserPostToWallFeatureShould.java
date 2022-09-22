@@ -1,14 +1,32 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Date;
 
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
 public class UserPostToWallFeatureShould {
+    @Mock
+    private Console console;
 
-	@Test
-	public void allow_a_user_to_post_to_their_wall() {
-		User user = new User();
-		Post post = new Post("This is a new post to my wall", user);
+    @Mock
+    private Clock clock;
 
-		assertThat(user.getPosts().get(0)).isEqualTo("This is a new post to my wall");
-	}
+    SocialNetworkService socialNetworkService = new SocialNetworkService(console, clock);
+
+    @Test
+    public void print_a_users_wall_when_requested() {
+        when(clock.now()).thenReturn(new Date());
+        socialNetworkService.readCommand("Charlie -> Have a great day");
+
+        when(clock.now()).thenReturn(new Date(1));
+
+        socialNetworkService.readCommand("Charlie wall");
+
+        verify(console).printLine("Charlie - Have a great day (1 second ago)");
+    }
 }
