@@ -13,7 +13,7 @@ public class SocialNetworkService {
         if(action.equals("->")){
             String message = command.split("->")[1];
             Post post = new Post(userName,clock,message);
-            post.postToWall(post);
+            post.postToWall();
         }
     }
 }

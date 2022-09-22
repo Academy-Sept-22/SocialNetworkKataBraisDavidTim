@@ -1,5 +1,14 @@
+import java.time.DateTimeException;
 import java.util.Date;
 
-public interface Clock {
-    Date now();
+public class Clock {
+    Date date;
+
+    public Clock(Date date) {
+        this.date = date;
+    }
+
+    public long now(){
+        return System.currentTimeMillis();
+    }
 }

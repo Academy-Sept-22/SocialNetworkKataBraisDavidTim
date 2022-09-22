@@ -1,6 +1,4 @@
 public class Post {
-
-    
     String user;
     Clock clock;
     String message;
@@ -11,8 +9,13 @@ public class Post {
         this.message=message;
     }
 
+//    public Post() {
+//
+//    }
 
-    public void postToWall(Post post) {
-        throw new UnsupportedOperationException();
+
+    public void postToWall() {
+        new Post(user, clock, message);
+        System.out.println("Posted");
     }
 }

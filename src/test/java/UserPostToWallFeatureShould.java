@@ -20,10 +20,10 @@ public class UserPostToWallFeatureShould {
 
     @Test
     public void print_a_users_wall_when_requested() {
-        when(clock.now()).thenReturn(new Date());
+        when(clock.now()).thenReturn(Long.valueOf(1000));
         socialNetworkService.readCommand("Charlie -> Have a great day");
 
-        when(clock.now()).thenReturn(new Date(1));
+        when(clock.now()).thenReturn(Long.valueOf(1001));
 
         socialNetworkService.readCommand("Charlie wall");
 
